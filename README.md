@@ -37,4 +37,4 @@ Building this system taught us important lessons in both hardware and software c
 * **Active LOW Relays:** I learned the hard way that most relays are **Active LOW** (LOW signal turns the pump ON). The code must be programmed to handle this inversion, otherwise the schedules will be backward.
 * **Isolation is Key:** Using two fully separate MCUs (instead of one shared one) is necessary to ensure the watering schedules are truly independent and the comparison data is reliable.
 * **Design for Stability:** The new A-frame structure offers much better stability and durability compared to the initial wooden prototype, proving that material choice matters for scaling up.
-* **Future Focus:** The experiment will show us which design—linear or circular—is the better way to deliver nutrients to the roots.
+* **Future Focus:** The experiment will show us which design is the better way to deliver nutrients to the roots.
