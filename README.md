@@ -4,7 +4,7 @@
 
 A scalable, automated **A-Frame Hydroponic System** engineered for scale production and experimentation. This system utilizes a **dual-MCU architecture** to independently control two separate growth channels, enabling comparative testing of irrigation schedules and piping designs.
 
----
+
 
 ## Core Innovation: Dual Control Architecture
 
@@ -17,7 +17,7 @@ The project employs a completely segregated electronics setup, ensuring that eac
 | **Pump** | 1 x Submersible Pump | 1 x Submersible Pump |
 | **Test Variable** | Linear Channel Design | Circular Channel Design |
 
----
+
 
 ## How To Use This System
 
@@ -28,7 +28,7 @@ To run a test on this dual system, follow these steps:
 3.  **Plant and Monitor:** Plant the same type of crop on both sides and track growth, water usage, and final yield.
 4.  **Compare Data:** Use the results to decide which pipe design and watering schedule is most efficient.
 
----
+
 
 ## What I Learned
 
