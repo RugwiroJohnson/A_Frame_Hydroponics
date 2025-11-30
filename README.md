@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-A scalable, automated **A-Frame Hydroponic System** engineered for agricultural research. This system utilizes a **dual-MCU architecture** to independently control two separate growth channels, enabling comparative testing of irrigation schedules and piping designs.
+A scalable, automated **A-Frame Hydroponic System** engineered for scale production and experimentation. This system utilizes a **dual-MCU architecture** to independently control two separate growth channels, enabling comparative testing of irrigation schedules and piping designs.
 
 ---
 
@@ -19,41 +19,22 @@ The project employs a completely segregated electronics setup, ensuring that eac
 
 ---
 
-## Technical Implementation (Code Logic)
+## How To Use This System
 
-The irrigation code is based on non-blocking `millis()` timing. The logic explicitly handles the **Active LOW** nature of the relay modules to ensure variables like `dayOnTime` accurately reflect the physical duration the pump is running.
+To run a test on this dual system, follow these steps:
 
-### Snippet: Irrigation Control (`main_controller.ino`)
+1.  **Set Schedules:** Program **MCU #1** with the test schedule for Side A and **MCU #2** with the different test schedule for Side B.
+2.  **Set Start Time:** Calibrate the time offset in the code so the day/night cycles match your local time.
+3.  **Plant and Monitor:** Plant the same type of crop on both sides and track growth, water usage, and final yield.
+4.  **Compare Data:** Use the results to decide which pipe design and watering schedule is most efficient.
 
-```cpp
-// --- TIMING CONFIGURATION (Values are corrected for flow) ---
-const unsigned long dayOnTime   = 6UL * 60UL * 1000UL;  // 6 min ON
-const unsigned long dayOffTime  = 2UL * 60UL * 60UL * 1000UL; // 2 hr OFF
+---
 
-// ... (night timing definitions) ...
+## What I Learned
 
-void setup() {
-  // ACTIVE LOW Relay Startup: LOW signal turns the pump ON.
-  digitalWrite(relayPin, LOW); 
-  pumpState = true; 
-  // ...
-}
+Building this system taught us important lessons in both hardware and software control:
 
-void loop() {
-  // ... (Day/Night Time Calculation & Duration Selection) ...
-
-  // --- PUMP CONTROL LOGIC ---
-  if (pumpState) { // Pump is currently ON
-    if (currentMillis - previousMillis >= onTime) {
-      pumpState = false;            
-      digitalWrite(relayPin, HIGH); // Turn OFF pump (Active Low: HIGH = OFF)
-      previousMillis = currentMillis;
-    }
-  } else { // Pump is currently OFF
-    if (currentMillis - previousMillis >= offTime) {
-      pumpState = true;             
-      digitalWrite(relayPin, LOW);  // Turn ON pump (Active Low: LOW = ON)
-      previousMillis = currentMillis;
-    }
-  }
-}
+* **Active LOW Relays:** I learned the hard way that most relays are **Active LOW** (LOW signal turns the pump ON). The code must be programmed to handle this inversion, otherwise the schedules will be backward.
+* **Isolation is Key:** Using two fully separate MCUs (instead of one shared one) is necessary to ensure the watering schedules are truly independent and the comparison data is reliable.
+* **Design for Stability:** The new A-frame structure offers much better stability and durability compared to the initial wooden prototype, proving that material choice matters for scaling up.
+* **Future Focus:** The experiment will show us which design—linear or circular—is the better way to deliver nutrients to the roots.
